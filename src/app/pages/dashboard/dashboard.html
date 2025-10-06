@@ -1,0 +1,103 @@
+<app-toolbar></app-toolbar>
+
+<div class="container">
+  <h1>Dashboard de Monitoramento</h1>
+  <p>Vizualização em tempo real</p>
+
+  <!-- Dashboard Cards -->
+  <mat-grid-list cols="4" rowHeight="150px" gutterSize="16px">
+    <mat-grid-tile>
+      <mat-card class="dash-card">
+        <mat-card-title>Total de Dispositivos</mat-card-title>
+        <mat-card-content>
+          <h2>8</h2>
+          <small>2 online, 1 offline</small>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="dash-card">
+        <mat-card-title>Rachaduras Hoje</mat-card-title>
+        <mat-card-content>
+          <h2>3</h2>
+          <small>+1 nas últimas 2h</small>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="dash-card">
+        <mat-card-title>Alertas Ativos</mat-card-title>
+        <mat-card-content>
+          <h2>2</h2>
+          <small>2 críticos</small>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="dash-card">
+        <mat-card-title>Status do Sistema</mat-card-title>
+        <mat-card-content>
+          <h2 style="color:green;">Operacional</h2>
+          <small>Última verificação: agora</small>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!-- Alertas Ativos -->
+  <h3>Alertas Ativos</h3>
+  <div class="alert-container">
+    <mat-card class="alert critical">
+    <mat-card-title>Dispositivo D-001 <span class="tag critical">Crítica</span></mat-card-title>
+    <mat-card-content>
+      Rachadura crítica detectada com expansão acelerada. Requer atenção imediata.
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="alert high">
+    <mat-card-title>Dispositivo D-003 <span class="tag high">Alta</span></mat-card-title>
+    <mat-card-content>
+      Nova rachadura detectada na estrutura de suporte principal.
+    </mat-card-content>
+  </mat-card>
+  </div>
+
+
+  <!-- Dispositivos Monitorados -->
+  <h3>Dispositivos Monitorados</h3>
+  <mat-grid-list cols="3" rowHeight="120px" gutterSize="16px">
+    <mat-grid-tile>
+      <mat-card class="dash-card">
+        <mat-card-title>Dispositivo D-001 <span class="tag warning">Alerta</span></mat-card-title>
+        <mat-card-content>
+          Local: Bloco A - Coluna 12 <br>
+          Última atualização: há 5 min
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="dash-card">
+        <mat-card-title>Dispositivo D-002 <span class="tag ok">Online</span></mat-card-title>
+        <mat-card-content>
+          Local: Bloco A - Viga 5 <br>
+          Última atualização: há 10 min
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="dash-card">
+        <mat-card-title>Dispositivo D-003 <span class="tag warning">Alerta</span></mat-card-title>
+        <mat-card-content>
+          Local: Bloco B - Viga 8 <br>
+          Última atualização: há 25 min
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
