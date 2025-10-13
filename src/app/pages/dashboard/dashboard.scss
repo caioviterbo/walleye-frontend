@@ -1,5 +1,26 @@
+mat-card {
+  border: 1px solid #c9d5e7;
+  background-color: #ffffff;
+}
+
+mat-grid-list {
+  width: 100%;
+  margin: 0;
+}
+
+
 .container {
-  padding: 20px;
+  padding: 25px 120px;
+  background-color: #F2F5F8;
+}
+
+.sections {
+  margin-top: 25px;
+}
+
+.section-titles {
+  font-size: 20px;
+
 }
 
 .spacer {
@@ -7,39 +28,123 @@
 }
 
 .tag {
-  padding: 2px 8px;
+  display: flex;
+  justify-self: center;
+  align-items: baseline;
+  width: auto;
+  padding: 0 8px;
   border-radius: 6px;
   font-size: 12px;
   color: #fff;
 }
 
-.critical {
-  background-color: #d32f2f !important;
+
+.high-border {
+  border: 1px solid #e7a5a5 !important;
 }
 
-.high {
+.warning-border {
+  border: 1px solid #f0cca3 !important;
+}
+
+.ok-border {
+  border: 1px solid #a4ebc3 !important;
+}
+
+.high-tag {
   background-color: #f44336 !important;
 }
 
-.warning {
+.warning-tag {
   background-color: #ff9800 !important;
 }
 
-.ok {
+.ok-tag {
   background-color: #4caf50 !important;
 }
 
-.alert {
-  margin-top: 10px;
-  padding: 25px;
+.high-background {
+  background-color: #F1EFF2 !important;
 }
+
+.warning-background {
+  background-color: #F2F0EF !important;
+}
+
+.ok-background {
+  background-color: #E8F2EF !important;
+}
+
+.high-icon {
+  color: #f44336 !important;
+}
+
+.warning-icon {
+  color: #ff9800 !important;
+}
+
+.ok-icon {
+  color: #4caf50 !important;
+}
+
+
+.alert-card {
+  width: 100%;
+  margin-top: 10px;
+  padding: 20px 20px 10px 20px;
+
+  .alert-card-title-container {
+    display: flex;
+    justify-content: space-between;
+
+    .alert-card-title {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+
+}
+
+.alert-content {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+  }
 
 .alert-container {
   display: flex;
-  gap: 20px;
+  gap: 25px;
 }
 
 .dash-card {
-  width: 300px;
-  
+  width: 100%;
+  padding: 15px;
+}
+
+.monitoring-card {
+  width: 100%;
+  padding: 10px;
+
+  .monitoring-card-title {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.title-card {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.micro-icons {
+  font-size: 20px;
+}
+
+.mini-icons {
+  font-size: 12px;
 }
