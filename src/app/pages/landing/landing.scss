@@ -1,0 +1,254 @@
+/* Hero Section */
+.hero {
+  background: #f4f7fb;
+  text-align: center;
+  padding: 100px 20px;
+
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: #163b74;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 18px;
+      color: #5b6675;
+      margin-bottom: 40px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+
+      button[mat-flat-button] {
+        padding: 10px 24px;
+      }
+
+      button[mat-stroked-button] {
+        border-color: #1c3b6b;
+        color: #1c3b6b;
+
+        &:hover {
+          background-color: #e6ecf7;
+        }
+      }
+    }
+  }
+}
+
+/* === Features === */
+.features {
+  background-color: #f8fafc;
+  text-align: center;
+  padding: 80px 20px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1c3b6b;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    color: #6b7585;
+    margin-bottom: 40px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: white;
+    border: 1px solid #dee4ef;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-icon {
+      background: #f1f4fa;
+      padding: 8px;
+      border-radius: 8px;
+      font-size: 28px;
+      color: #1c3b6b;
+    }
+
+    h3 {
+      font-weight: 700;
+      color: #1c3b6b;
+      margin-top: 16px;
+    }
+
+    p {
+      color: #5b6675;
+      font-size: 15px;
+    }
+  }
+}
+
+/* === Why Section === */
+.why {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 80px 60px;
+  background: #f4f7fb;
+
+  .why-left {
+    flex: 1 1 50%;
+
+    h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1c3b6b;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #5b6675;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        color: #2b2b2b;
+        font-size: 16px;
+
+        .check {
+          color: #16a34a;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  .why-right {
+    flex: 1 1 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .stat {
+      border-radius: 10px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        margin: 0;
+        color: #444;
+        font-size: 14px;
+      }
+
+      h3 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 22px;
+      }
+
+      mat-icon {
+        font-size: 30px;
+      }
+    }
+
+    .green {
+      background: #ecfdf5;
+      color: #16a34a;
+    }
+
+    .blue-light {
+      background: #eef2f6;
+      color: #1c3b6b;
+    }
+
+    .blue {
+      background: #e5f0ff;
+      color: #1c3b6b;
+    }
+  }
+}
+
+/* === CTA === */
+.cta {
+  text-align: center;
+  background: linear-gradient(180deg, #eaf1fb, #dfe7f4);
+  padding: 80px 20px;
+
+  h2 {
+    color: #1c3b6b;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  p {
+    color: #5b6675;
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: #1c3b6b;
+    color: white;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #274a8b;
+    }
+  }
+}
+
+/* === Footer === */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  padding: 16px 60px;
+  border-top: 1px solid #e0e6ee;
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .icon {
+      color: #1c3b6b;
+    }
+
+    span {
+      color: #1c3b6b;
+      font-weight: 600;
+    }
+  }
+
+  p {
+    color: #6b7585;
+    font-size: 13px;
+  }
+}

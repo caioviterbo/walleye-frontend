@@ -71,7 +71,13 @@ export class Auth {
         this.registerForm.value.email,
         this.registerForm.value.senha,
       );
-      this.authService.registrarUsuario(registro).subscribe();
+      this.authService.registrarUsuario(registro).subscribe({
+        next:(value) => {
+           this.router.navigate(['/dashboard']);
+        }, error(err) {
+          alert('Erro ao se registrar!');
+        },
+      });
 
     }
   }

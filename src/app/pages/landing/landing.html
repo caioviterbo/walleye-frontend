@@ -1,0 +1,87 @@
+<app-toolbar></app-toolbar>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Detecção Inteligente de <br> Rachaduras com IA</h1>
+    <p>
+      Proteja sua estrutura com monitoramento contínuo e alertas em tempo real. <br>
+      Tecnologia de ponta para prevenir problemas antes que se tornem críticos.
+    </p>
+
+    <div class="actions">
+      <button mat-flat-button color="primary" (click)="onAccessSystem()">
+        Começar Agora <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <button mat-stroked-button (click)="onDemo()">Ver Demonstração</button>
+    </div>
+  </div>
+</section>
+
+<!-- Recursos Principais -->
+<section class="features">
+  <h2>Recursos Principais</h2>
+  <p class="subtitle">
+    Sistema completo de monitoramento com tecnologia de última geração para máxima segurança e eficiência.
+  </p>
+
+  <div class="feature-grid">
+    <div class="feature-card" *ngFor="let f of features">
+      <mat-icon class="feature-icon">{{ f.icon }}</mat-icon>
+      <h3>{{ f.title }}</h3>
+      <p>{{ f.description }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Por Que Escolher -->
+<section class="why">
+  <div class="why-left">
+    <h2>Por Que Escolher o WallEye?</h2>
+    <p>
+      Nossa solução combina hardware especializado com algoritmos avançados de inteligência artificial para fornecer o sistema de monitoramento estrutural mais confiável do mercado.
+    </p>
+
+    <ul>
+      <li *ngFor="let b of benefits">
+        <mat-icon class="check">check_circle</mat-icon> {{ b }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="why-right">
+    <div class="stat green">
+      <p>Taxa de Detecção</p>
+      <h3>99.7%</h3>
+      <mat-icon>monitor_heart</mat-icon>
+    </div>
+
+    <div class="stat blue-light">
+      <p>Tempo de Resposta</p>
+      <h3>&lt; 1s</h3>
+      <mat-icon>notifications</mat-icon>
+    </div>
+
+    <div class="stat blue">
+      <p>Dispositivos Ativos</p>
+      <h3>1,200+</h3>
+      <mat-icon>dns</mat-icon>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta">
+  <h2>Pronto para Proteger Sua Estrutura?</h2>
+  <p>Junte-se a centenas de empresas que confiam no WallEye para manter suas estruturas seguras.</p>
+  <button mat-flat-button color="primary" (click)="onAccessSystem()">
+    Começar Gratuitamente <mat-icon>arrow_forward</mat-icon>
+  </button>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">
+    <mat-icon class="icon">shield</mat-icon>
+    <span><strong>WallEye</strong></span>
+  </div>
+  <p>© 2025 WallEye. Todos os direitos reservados.</p>
+</footer>
