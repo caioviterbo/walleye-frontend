@@ -1,39 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { Login } from '../../models/login';
 import { Registro } from '../../models/registro';
-import { AuthService } from '../../services/auth-service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth-service';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-auth-component',
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
-    MatInputModule,
+    MatIconModule,
     MatButtonModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
-  templateUrl: './auth.html',
-  styleUrl: './auth.scss'
+  templateUrl: './auth-component.html',
+  styleUrl: './auth-component.scss'
 })
-export class Auth {
+export class AuthComponent implements OnInit {
 
   selectedTab = 0;
   loginForm: FormGroup;
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService,
+    private activeRouter: ActivatedRoute, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]]
@@ -46,13 +50,19 @@ export class Auth {
     });
   }
 
+  ngOnInit() {
+    this.activeRouter.queryParamMap.subscribe(params => {
+      this.selectedTab = params.get('tab') === 'registro' ? 1 : 0
+    });
+  }
+
   login() {
     if (this.loginForm.valid) {
      const login = new Login(
         this.loginForm.value.email,
         this.loginForm.value.senha,
      );
-     this.authService.logarUsuario(login).subscribe({
+     this.authService.logar(login).subscribe({
       next:(value) => {
         this.router.navigate(['/dashboard']);
       }, error(err) {
@@ -71,7 +81,7 @@ export class Auth {
         this.registerForm.value.email,
         this.registerForm.value.senha,
       );
-      this.authService.registrarUsuario(registro).subscribe({
+      this.authService.registrar(registro).subscribe({
         next:(value) => {
            this.router.navigate(['/dashboard']);
         }, error(err) {
@@ -80,11 +90,6 @@ export class Auth {
       });
 
     }
-  }
-
-  testeGet() {
-    console.log("get")
-    this.authService.testeGet().subscribe();
   }
 
 }

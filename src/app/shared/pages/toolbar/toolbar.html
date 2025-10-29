@@ -1,8 +1,17 @@
-<mat-toolbar class="toolbar" color="primary">
-  <span>WallEye</span>
-  <span class="spacer"></span>
-  <button matButton="outlined" routerLink="/auth" routerLinkActive="active">
-    <mat-icon>login</mat-icon> Login
+<mat-toolbar class="toolbar">
+  <div class="logo">
+    <mat-icon class="icon">shield</mat-icon>
+    <div class="brand">
+      <h1>WallEye</h1>
+      <p>Sistema de Monitoramento</p>
+    </div>
+  </div>
+  <div class="btn-container">
+    <button matButton="outlined" (click)="irRegistrar()" routerLinkActive="active">
+      <mat-icon>login</mat-icon> Registro
+    </button>
+    <button matButton="filled" routerLink="/auth" routerLinkActive="active">
+      <mat-icon>login</mat-icon> Login
   </button>
+  </div>
 </mat-toolbar>
-
