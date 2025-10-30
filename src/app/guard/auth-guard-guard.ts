@@ -9,8 +9,10 @@ export const authGuardGuard: CanActivateFn = (route, state) => {
   const isLoggedIn = authService.isAuthenticated();
 
   if (isLoggedIn) {
+    console.log('[AuthGuard] token válido detectado');
     return true;
   }
-
-   return router.createUrlTree(['/auth']);
+    console.log('[AuthGuard] token invalido detectado');
+    router.navigate(['/auth']);
+    return false;
 };

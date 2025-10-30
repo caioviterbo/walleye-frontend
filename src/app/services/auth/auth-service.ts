@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environments } from '../../environments/environments';
-import { tap } from 'rxjs';
 import { Login } from '../../models/login';
 import { Registro } from '../../models/registro';
 
@@ -16,23 +15,42 @@ export class AuthService {
 
   logar(credenciais: Login) {
     return this.http.post<{token: string, expiresIn: number}>(
-       `${this.API}/auth/login`, credenciais
-    ).pipe(tap(res => localStorage.setItem(this.TOKEN_KEY, res.token)))
+       `${this.API}/auth/login`, credenciais)
   }
 
   registrar(credenciais: Registro) {
-    return this.http.post(`${this.API}/auth/signup`, credenciais)
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return this.http.post(`${this.API}/auth/registro`, credenciais)
   }
 
   logout() {
     localStorage.removeItem(this.TOKEN_KEY);
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getToken();
+  saveToken(token: string) {
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
+
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
+  }
+
+  isTokenExpired(token: string): boolean {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return Date.now() > payload.exp * 1000;
+  } catch {
+    return true;
+  }
+}
+
+getToken(): string | null {
+  const token = localStorage.getItem(this.TOKEN_KEY);
+  if (!token || this.isTokenExpired(token)) {
+    localStorage.removeItem(this.TOKEN_KEY);
+    return null;
+  }
+  return token;
+}
+
 }

@@ -64,7 +64,10 @@ export class AuthComponent implements OnInit {
      );
      this.authService.logar(login).subscribe({
       next:(value) => {
-        this.router.navigate(['/dashboard']);
+        this.authService.saveToken(value.token)
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 100);
       }, error(err) {
         alert('Email ou senha inválidos!');
       },
@@ -83,7 +86,9 @@ export class AuthComponent implements OnInit {
       );
       this.authService.registrar(registro).subscribe({
         next:(value) => {
-           this.router.navigate(['/dashboard']);
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+        }, 100);
         }, error(err) {
           alert('Erro ao se registrar!');
         },
