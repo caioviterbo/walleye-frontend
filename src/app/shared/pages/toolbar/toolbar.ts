@@ -2,20 +2,36 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router, RouterLink } from "@angular/router";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { AuthService } from '../../../services/auth/auth-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-toolbar',
   imports: [MatToolbarModule,
     MatIconModule,
-    MatButtonModule, RouterLink],
+    MatButtonModule,
+    RouterLink,
+    CommonModule, RouterLinkActive],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss'
 })
 export class Toolbar {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   irRegistrar() {
     this.router.navigate(['/auth'], { queryParams: { tab: 'registro' } });
   }
+
+  logar() {
+     this.router.navigate(['/login']);
+  }
+
+  detectarLogin() {
+    return this.authService.isAuthenticated()
+  }
+
+  logout() {
+  localStorage.removeItem('token'); // remove token
+}
 }
