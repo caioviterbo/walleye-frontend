@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Toolbar } from "../../shared/pages/toolbar/toolbar";
 
 @Component({
@@ -18,6 +18,9 @@ import { Toolbar } from "../../shared/pages/toolbar/toolbar";
   styleUrl: './landing.scss'
 })
 export class Landing {
+
+  constructor(private router: Router) {}
+
   features = [
     {
       icon: 'monitor_heart',
@@ -50,9 +53,8 @@ export class Landing {
     'Suporte técnico especializado'
   ];
 
-  onAccessSystem() {
-    // redireciona para a página de login
-    window.location.href = '/auth';
+   irRegistrar() {
+    this.router.navigate(['/auth'], { queryParams: { tab: 'registro' } });
   }
 
   onDemo() {

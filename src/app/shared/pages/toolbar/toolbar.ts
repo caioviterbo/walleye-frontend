@@ -24,11 +24,19 @@ export class Toolbar {
   }
 
   logar() {
-     this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
+  }
+
+  acessarDashboard() {
+    this.router.navigate(['/dashboard']); //precisa corrigir
   }
 
   detectarLogin() {
     return this.authService.isAuthenticated()
+  }
+
+  detectarLoginEPagina() {
+    return this.authService.isAuthenticated() && this.router.url === '/'
   }
 
   logout() {

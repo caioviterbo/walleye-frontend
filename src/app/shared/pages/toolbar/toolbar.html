@@ -7,20 +7,21 @@
     </div>
   </div>
   <div class="btn-container">
-    <button *ngIf="!detectarLogin()" matButton="outlined" (click)="irRegistrar()" routerLinkActive="active">
-      <mat-icon>login</mat-icon> Registro
-    </button>
-
-    <button *ngIf="detectarLogin()" matButton="outlined">
+    <button *ngIf="detectarLogin() && !detectarLoginEPagina()" matButton="outlined">
       <mat-icon>login</mat-icon> Adicionar Dispositivo
     </button>
 
-    <button *ngIf="!detectarLogin()" matButton="filled" (click)="logar()" routerLinkActive="active">
-      <mat-icon>login</mat-icon> Login
-  </button>
+    <button *ngIf="detectarLoginEPagina()" matButton="outlined" (click)="logar()" routerLinkActive="active">
+      <mat-icon>login</mat-icon> Acessar dashboard
+    </button>
 
-  <button *ngIf="detectarLogin()" matButton="filled" (click)="logout()">
+    <button *ngIf="detectarLogin()" matButton="filled" (click)="logout()">
       <mat-icon>login</mat-icon> Logout
     </button>
+
+    <button *ngIf="!detectarLogin()" matButton="filled" (click)="logar()" routerLinkActive="active">
+      <mat-icon>login</mat-icon> Acessar sistema
+    </button>
+
   </div>
 </mat-toolbar>

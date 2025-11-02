@@ -8,6 +8,11 @@ export const authGuardGuard: CanActivateFn = (route, state) => {
 
   const isLoggedIn = authService.isAuthenticated();
 
+  const token = authService.getToken();
+  console.log('[DEBUG GUARD] Token:', token);
+  console.log('[DEBUG GUARD] Token expirado?', authService.isTokenExpired(token));
+  console.log('[DEBUG GUARD] Está logado?', authService.isAuthenticated());
+
   if (isLoggedIn) {
     console.log('[AuthGuard] token válido detectado');
     return true;
@@ -15,4 +20,5 @@ export const authGuardGuard: CanActivateFn = (route, state) => {
     console.log('[AuthGuard] token invalido detectado');
     router.navigate(['/auth']);
     return false;
+
 };

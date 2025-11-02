@@ -35,9 +35,9 @@ export class AuthService {
     return !!token && !this.isTokenExpired(token);
   }
 
-  isTokenExpired(token: string): boolean {
+  isTokenExpired(token: string | null): boolean {
   try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
+    const payload = token?.split('.')[1] ? JSON.parse(atob(token.split('.')[1])) : null;
     return Date.now() > payload.exp * 1000;
   } catch {
     return true;
