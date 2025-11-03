@@ -23,12 +23,16 @@ export class Toolbar {
     this.router.navigate(['/auth'], { queryParams: { tab: 'registro' } });
   }
 
-  logar() {
+  irLogar() {
     this.router.navigate(['/login']);
   }
 
   acessarDashboard() {
     this.router.navigate(['/dashboard']); //precisa corrigir
+  }
+
+  irAdicionarDispositivo() {
+    this.router.navigate(['/adicionarDispositivo']);
   }
 
   detectarLogin() {

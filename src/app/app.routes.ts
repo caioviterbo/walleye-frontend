@@ -16,6 +16,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/auth-component/auth-component').then(m => m.AuthComponent)
   },
   {
+    path: 'adicionarDispositivo' ,
+    loadComponent: () => import('./pages/device/add-device/add-device').then(m => m.AddDevice)
+  },
+  {
     path: '**',
     redirectTo: 'auth'
   }
