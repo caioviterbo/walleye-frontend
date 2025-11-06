@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Dispositivo } from '../../../models/dispositivo';
+import { DispositivoService } from '../../../services/dispositivo/dispositivo-service';
 
 @Component({
   selector: 'app-add-device',
@@ -23,22 +25,28 @@ import { MatInputModule } from '@angular/material/input';
 export class AddDevice {
   deviceForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private dispositivoService: DispositivoService) {
     this.deviceForm = this.fb.group({
-      name: ['', Validators.required],
-      location: ['', Validators.required]
+      nome: ['', Validators.required],
+      localizacao: ['', Validators.required]
     });
   }
 
   onSubmit() {
     if (this.deviceForm.valid) {
-      console.log('Novo dispositivo:', this.deviceForm.value);
-      // Aqui você pode enviar para a API / backend
+      const dispositivo = new Dispositivo(
+        this.deviceForm.value.nome,
+        this.deviceForm.value.localizacao
+      );
+      this.dispositivoService.adicionarDispositivo(dispositivo).subscribe({
+        next(value) {
+            console.log(value)
+        },
+      })
     }
   }
 
   onCancel() {
     console.log('Ação cancelada');
-    // Pode redirecionar para o dashboard ou outra página
   }
 }
