@@ -13,11 +13,12 @@ export const routes: Routes = [
   },
   {
     path: 'auth' ,
-    loadComponent: () => import('./pages/auth-component/auth-component').then(m => m.AuthComponent)
+    loadComponent: () => import('./pages/auth-component/auth-component').then(m => m.AuthComponent),
   },
   {
     path: 'adicionarDispositivo' ,
-    loadComponent: () => import('./pages/device/add-device/add-device').then(m => m.AddDevice)
+    loadComponent: () => import('./pages/device/add-device/add-device').then(m => m.AddDevice),
+    //canActivate: [authGuardGuard] resolver - caso de f5 ele não detecta que esta logado
   },
   {
     path: '**',
