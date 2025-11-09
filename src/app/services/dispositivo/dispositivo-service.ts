@@ -12,6 +12,6 @@ export class DispositivoService {
   constructor(private http: HttpClient) {}
 
   adicionarDispositivo(dispositivo: Dispositivo) {
-    return this.http.post(`${this.API}device/addDevice`, dispositivo)
+    return this.http.post(`${this.API}device/add`, dispositivo)
   }
 }

@@ -9,6 +9,7 @@ import { Dispositivo } from '../../../models/dispositivo';
 import { DispositivoService } from '../../../services/dispositivo/dispositivo-service';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { log } from 'console';
+import { environments } from '../../../environments/environments';
 
 @Component({
   selector: 'app-add-device',
@@ -49,10 +50,12 @@ export class AddDevice {
         console.log(res)
         this.qrData = JSON.stringify({
           id: res.id,
-          codigo_pareador: res.codigo_pareador
+          codigo_pareador: res.codigo_pareador,
+          api_url: environments.api
         })
         this.cdr.markForCheck()
         this.contagemExpiracao()
+        console.log(this.qrData)
       })
     }
   }
