@@ -1,159 +1,90 @@
 <app-toolbar></app-toolbar>
 
-<div class="container">
+<div class="container" *ngIf="!loading && dashboardData">
   <h1>Dashboard de Monitoramento</h1>
-  <p>Vizualização em tempo real</p>
+  <p>Visualização em tempo real</p>
 
-  <!-- Dashboard Cards -->
   <mat-grid-list cols="4" rowHeight="2:1" gutterSize="20px">
     <mat-grid-tile>
       <mat-card class="dash-card">
         <mat-card-title class="title-card">
-          Total de Dispositivos <mat-icon class="material-symbols-outlined">shield</mat-icon>
+          Total de Dispositivos <mat-icon>shield</mat-icon>
         </mat-card-title>
-        <h2>8</h2>
-        <small>2 online, 1 offline</small>
+        <h2>{{ dashboardData.totalDispositivos }}</h2>
+        <small>{{ dashboardData.online }} online, {{ dashboardData.offline }} offline</small>
       </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile>
       <mat-card class="dash-card high-border high-background">
         <mat-card-title class="title-card">
-          Rachaduras Hoje <mat-icon class="material-symbols-outlined high-icon">warning</mat-icon>
+          Rachaduras Detectadas <mat-icon>warning</mat-icon>
         </mat-card-title>
-        <h2>3</h2>
-        <small>+1 nas últimas 2h</small>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-      <mat-card class="dash-card warning-border warning-background">
-        <mat-card-title class="title-card">
-          Alertas Ativos <mat-icon class="material-symbols-outlined warning-icon">vital_signs</mat-icon>
-        </mat-card-title>
-        <h2>2</h2>
-        <small>2 críticos</small>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-      <mat-card class="dash-card ok-border ok-background">
-        <mat-card-title class="title-card">
-          Status do Sistema <mat-icon class="material-symbols-outlined ok-icon">check_circle</mat-icon>
-        </mat-card-title>
-        <h2 >Operacional</h2>
-        <small>Última verificação: agora</small>
+        <h2>{{ dashboardData.totalAlertas }}</h2>
+        <small>{{ dashboardData.ativos }} ativos</small>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 
-  <!-- Alertas Ativos -->
   <div class="sections">
     <h2 class="section-titles">Alertas Ativos</h2>
     <div class="alert-container">
-      <mat-card class="alert-card high-border">
+      <mat-card
+        *ngFor="let alerta of dashboardData.alertas"
+        class="alert-card"
+        [ngClass]="{
+          'high-border': alerta.severidade === 'CRÍTICA',
+          'warning-border': alerta.severidade === 'ALTA'
+        }"
+      >
         <mat-card-title class="alert-card-title-container">
           <span class="alert-card-title">
-            <mat-icon class="material-symbols-outlined high-icon">warning</mat-icon>
-            Dispositivo D-001
+            <mat-icon>warning</mat-icon>
+            {{ alerta.idDispositivo?.nome || 'Desconhecido' }}
           </span>
-          <span class="tag high-tag">Crítica</span>
+          <span class="tag">{{ alerta.severidade }}</span>
         </mat-card-title>
-        <mat-card-content class="alert-content">
-          <div> <!--alinhar-->
-            <mat-icon class="material-symbols-outlined micro-icons">location_on</mat-icon>
-            <span>Local: Bloco A - Coluna 12</span>
-            <mat-icon class="material-symbols-outlined micro-icons">history</mat-icon>
-            <span>Há 5 minutos</span>
+        <mat-card-content>
+          <div>
+            <mat-icon>location_on</mat-icon>
+            {{ alerta.idDispositivo?.localizacao }}
           </div>
           <div>
-            <mat-icon class="material-symbols-outlined">history</mat-icon>
-            Rachadura crítica detectada com expansão acelerada. Requer atenção imediata.
-          </div>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="alert-card high-border">
-        <mat-card-title class="alert-card-title-container">
-          <span class="alert-card-title">
-            <mat-icon class="material-symbols-outlined high-icon">warning</mat-icon>
-            Dispositivo D-003
-          </span>
-          <span class="tag high-tag">Alta</span>
-        </mat-card-title>
-        <mat-card-content class="alert-content">
-          <div> <!--alinhar-->
-            <mat-icon class="material-symbols-outlined micro-icons">location_on</mat-icon>
-            <span>Local: Bloco A - Coluna 12</span>
-            <mat-icon class="material-symbols-outlined micro-icons">history</mat-icon>
-            <span>Há 5 minutos</span>
-          </div>
-          <div>
-            Nova rachadura detectada na estrutura de suporte principal.
+            <mat-icon>history</mat-icon>
+            {{ alerta.mensagem }}
           </div>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
 
-  <!-- Dispositivos Monitorados -->
   <div class="sections">
     <h2 class="section-titles">Dispositivos Monitorados</h2>
     <mat-grid-list cols="3" rowHeight="2:1" gutterSize="20px">
-      <mat-grid-tile>
+      <mat-grid-tile *ngFor="let dispositivo of dashboardData.dispositivos">
         <mat-card class="monitoring-card">
           <mat-card-title class="monitoring-card-title">
-            <span>Dispositivo D-001</span>
-            <span class="tag warning-tag">
-              <mat-icon class="material-symbols-outlined mini-icons">vital_signs</mat-icon>
-              Alerta
+            <span>{{ dispositivo.nome }}</span>
+            <span
+              class="tag"
+              [ngClass]="{
+                'ok-tag': dispositivo.status === 'ONLINE',
+                'warning-tag': dispositivo.status !== 'ONLINE'
+              }"
+            >
+              <mat-icon class="mini-icons">
+                {{ dispositivo.status === 'ONLINE' ? 'wifi' : 'vital_signs' }}
+              </mat-icon>
+              {{ dispositivo.status }}
             </span>
           </mat-card-title>
-          <mat-card-content class="alert-content">
-            <div> <!--alinhar-->
-              <mat-icon class="material-symbols-outlined micro-icons">location_on</mat-icon>
-              Local: Bloco A - Coluna 12</div>
-            <div>Última atualização: há 5 min </div>
-            <div>Rachaduras detectadas: 1</div>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
 
-      <mat-grid-tile>
-        <mat-card class="monitoring-card">
-          <mat-card-title class="monitoring-card-title">
-            <span>Dispositivo D-002</span>
-            <span class="tag ok-tag">
-              <mat-icon class="material-symbols-outlined mini-icons">wifi</mat-icon>
-              Online
-            </span>
-          </mat-card-title>
-          <mat-card-content class="alert-content">
-            <div> <!--alinhar-->
-              <mat-icon class="material-symbols-outlined micro-icons">location_on</mat-icon>
-              local: Bloco A - Viga 5</div>
-            <div>Última atualização: há 10 min</div>
-            <div>Rachaduras detectadas: 0</div>
-
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-
-      <mat-grid-tile>
-        <mat-card class="monitoring-card">
-          <mat-card-title class="monitoring-card-title">
-            <span>Dispositivo D-003</span>
-            <span class="tag warning-tag">
-              <mat-icon class="material-symbols-outlined mini-icons">vital_signs</mat-icon>
-              Alerta
-            </span>
-          </mat-card-title>
-          <mat-card-content class="alert-content">
-            <div> <!--alinhar-->
-              <mat-icon class="material-symbols-outlined micro-icons">location_on</mat-icon>
-              Local: Bloco B - Viga 8</div>
-            <div>Última atualização: há 25 min</div>
-            <div>Rachaduras detectadas: 0</div>
+          <mat-card-content>
+            <div>
+              <mat-icon>location_on</mat-icon> {{ dispositivo.localizacao }}
+            </div>
+            <div>Última atualização: {{ dispositivo.ultima_atualizacao }}</div>
+            <div>Rachaduras detectadas: {{ dispositivo.rachaduras_detectadas }}</div>
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
@@ -161,4 +92,6 @@
   </div>
 </div>
 
-
+<div *ngIf="loading" class="loading">
+  <mat-spinner></mat-spinner>
+</div>
