@@ -4,91 +4,99 @@
   <h1>Dashboard de Monitoramento</h1>
   <p>Visualização em tempo real</p>
 
-  <mat-grid-list cols="4" rowHeight="2:1" gutterSize="20px">
-    <mat-grid-tile>
-      <mat-card class="dash-card">
-        <mat-card-title class="title-card">
-          Total de Dispositivos <mat-icon>shield</mat-icon>
-        </mat-card-title>
-        <h2>{{ dashboardData.totalDispositivos }}</h2>
-        <small>{{ dashboardData.online }} online, {{ dashboardData.offline }} offline</small>
-      </mat-card>
-    </mat-grid-tile>
+  <!-- DASHBOARD CARDS -->
+  <div class="cards-row">
+    <div class="card total">
+      <div class="card-header">
+        <h3>Total de Dispositivos</h3>
+        <mat-icon>shield</mat-icon>
+      </div>
+      <h2>{{ dashboardData.totalDispositivos }}</h2>
+      <small>{{ dashboardData.online }} online, {{ dashboardData.offline }} offline</small>
+    </div>
 
-    <mat-grid-tile>
-      <mat-card class="dash-card high-border high-background">
-        <mat-card-title class="title-card">
-          Rachaduras Detectadas <mat-icon>warning</mat-icon>
-        </mat-card-title>
-        <h2>{{ dashboardData.totalAlertas }}</h2>
-        <small>{{ dashboardData.ativos }} ativos</small>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+    <div class="card danger">
+      <div class="card-header">
+        <h3>Rachaduras Hoje</h3>
+        <mat-icon>warning</mat-icon>
+      </div>
+      <h2>{{ dashboardData.totalAlertas }}</h2>
+      <small>+1 nas últimas 2h</small>
+    </div>
 
-  <div class="sections">
-    <h2 class="section-titles">Alertas Ativos</h2>
-    <div class="alert-container">
-      <mat-card
-        *ngFor="let alerta of dashboardData.alertas"
-        class="alert-card"
-        [ngClass]="{
-          'high-border': alerta.severidade === 'CRÍTICA',
-          'warning-border': alerta.severidade === 'ALTA'
-        }"
-      >
-        <mat-card-title class="alert-card-title-container">
-          <span class="alert-card-title">
-            <mat-icon>warning</mat-icon>
-            {{ alerta.idDispositivo?.nome || 'Desconhecido' }}
-          </span>
-          <span class="tag">{{ alerta.severidade }}</span>
-        </mat-card-title>
-        <mat-card-content>
-          <div>
-            <mat-icon>location_on</mat-icon>
-            {{ alerta.idDispositivo?.localizacao }}
-          </div>
-          <div>
-            <mat-icon>history</mat-icon>
-            {{ alerta.mensagem }}
-          </div>
-        </mat-card-content>
-      </mat-card>
+    <div class="card warning">
+      <div class="card-header">
+        <h3>Alertas Ativos</h3>
+        <mat-icon>vital_signs</mat-icon>
+      </div>
+      <h2>{{ dashboardData.totalAlertas }}</h2>
+      <small>0 críticos</small>
+    </div>
+
+    <div class="card success">
+      <div class="card-header">
+        <h3>Status do Sistema</h3>
+        <mat-icon>check_circle</mat-icon>
+      </div>
+      <h2>Operacional</h2>
+      <small>Última verificação: agora</small>
     </div>
   </div>
 
-  <div class="sections">
-    <h2 class="section-titles">Dispositivos Monitorados</h2>
-    <mat-grid-list cols="3" rowHeight="2:1" gutterSize="20px">
-      <mat-grid-tile *ngFor="let dispositivo of dashboardData.dispositivos">
-        <mat-card class="monitoring-card">
-          <mat-card-title class="monitoring-card-title">
-            <span>{{ dispositivo.nome }}</span>
-            <span
-              class="tag"
-              [ngClass]="{
-                'ok-tag': dispositivo.status === 'ONLINE',
-                'warning-tag': dispositivo.status !== 'ONLINE'
-              }"
-            >
-              <mat-icon class="mini-icons">
-                {{ dispositivo.status === 'ONLINE' ? 'wifi' : 'vital_signs' }}
-              </mat-icon>
-              {{ dispositivo.status }}
-            </span>
-          </mat-card-title>
+  <!-- ALERTAS -->
+  <h2 class="section-title danger-text">
+    <mat-icon>warning</mat-icon> Alertas Ativos
+  </h2>
+  <div class="alertas-container">
+    <div *ngFor="let alerta of dashboardData.alertas" class="alert-card"
+         [ngClass]="{'critico': alerta.severidade === 'crítica', 'alta': alerta.severidade === 'alta'}">
+      <div class="alert-header">
+        <mat-icon>warning</mat-icon>
+        <span>{{ alerta.dispositivo?.nome }}</span>
+        <span class="tag" [ngClass]="{
+          'critico-tag': alerta.severidade === 'crítica',
+          'alta-tag': alerta.severidade === 'alta'
+        }">{{ alerta.severidade || 'Indefinida' }}</span>
+      </div>
+      <div class="alert-body">
+        <div class="alert-info">
+          <mat-icon>location_on</mat-icon>
+          <span>{{ alerta.dispositivo?.localizacao || 'Local não informado' }}</span>
+          <mat-icon>history</mat-icon>
+          <span>{{ alerta.data_deteccao | date:'short' }}</span>
+        </div>
+        <p>{{ alerta.mensagem }}</p>
+      </div>
+    </div>
+  </div>
 
-          <mat-card-content>
-            <div>
-              <mat-icon>location_on</mat-icon> {{ dispositivo.localizacao }}
-            </div>
-            <div>Última atualização: {{ dispositivo.ultima_atualizacao }}</div>
-            <div>Rachaduras detectadas: {{ dispositivo.rachaduras_detectadas }}</div>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+  <!-- DISPOSITIVOS -->
+  <h2 class="section-title primary-text">
+    <mat-icon>shield</mat-icon> Dispositivos Monitorados
+  </h2>
+  <div class="dispositivos-container">
+    <div *ngFor="let dispositivo of dashboardData.dispositivos" class="device-card">
+      <div class="device-header">
+        <span>{{ dispositivo.nome }}</span>
+        <span class="tag" [ngClass]="{
+          'online-tag': dispositivo.status === 'ONLINE',
+          'alerta-tag': dispositivo.status === 'ALERTA',
+          'critico-tag': dispositivo.status === 'CRÍTICO',
+          'offline-tag': dispositivo.status === 'OFFLINE'
+        }">
+          <mat-icon>
+            {{ dispositivo.status === 'ONLINE' ? 'wifi' : 'vital_signs' }}
+          </mat-icon>
+          {{ dispositivo.status }}
+        </span>
+      </div>
+      <div class="device-body">
+        <mat-icon>location_on</mat-icon> {{ dispositivo.localizacao || 'N/D' }}
+        <div>Última atualização: {{ (dispositivo.ultima_atualizacao || 'N/D') | date:'short' }}</div>
+        <div>Rachaduras detectadas: {{ dispositivo.rachaduras_detectadas || 0 }}</div>
+      </div>
+      <button mat-flat-button color="primary" class="full-width" (click)="editarDispositivo(dispositivo)">Editar</button>
+    </div>
   </div>
 </div>
 

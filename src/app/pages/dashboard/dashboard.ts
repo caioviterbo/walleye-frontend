@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,6 +10,8 @@ import { DashboardService } from '../../services/dashboard/dashboard-service';
 import { DashboardResponse } from '../../models/dashboard-response';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
+import { DispositivoDashboard } from '../../models/dispositivo-dashboard';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +33,9 @@ export class Dashboard implements OnInit {
   dashboardData!: DashboardResponse;
   loading = true;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService, private cdr: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.dashboardService.getDashboard().subscribe({
@@ -40,12 +44,17 @@ export class Dashboard implements OnInit {
         this.dashboardData = data;
         this.loading = false;
         console.log(this.dashboardData)
+        this.cdr.markForCheck()
       },
       error: (err) => {
         console.error('Erro ao carregar dashboard:', err);
         this.loading = false;
       }
     });
+  }
+
+  editarDispositivo(dispositivo: DispositivoDashboard) {
+    this.router.navigate(['/adicionarDispositivo'], { state: { dispositivo } });
   }
 
 }

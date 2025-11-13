@@ -1,17 +1,19 @@
 <div class="add-device-container">
-  <h1>Adicionar Dispositivo</h1>
+  <h1 *ngIf="!modoEdicao">Adicionar Dispositivo</h1>
+  <h1 *ngIf="modoEdicao">Editar Dispositivo</h1>
   <p class="subtitle">Configure um novo dispositivo de monitoramento estrutural</p>
 
   <mat-card class="form-card">
     <div class="header">
       <mat-icon class="icon">shield</mat-icon>
       <div>
-        <h2>Novo Dispositivo</h2>
+        <h2 *ngIf="!modoEdicao">Novo Dispositivo</h2>
+        <h2 *ngIf="modoEdicao">Edição de Dispositivo</h2>
         <p>Insira as informações do dispositivo</p>
       </div>
     </div>
 
-    <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="deviceForm" (ngSubmit)="adicionarDispositivo()">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label>Nome do Dispositivo</mat-label>
         <input matInput formControlName="nome" placeholder="Ex: Sensor A-101" />
@@ -23,12 +25,25 @@
       </mat-form-field>
 
       <div class="btn-group">
-        <button mat-flat-button color="primary" class="primary-btn" [disabled]="deviceForm.invalid">
+        <button  *ngIf="!modoEdicao" mat-flat-button color="primary" class="primary-btn"
+        type="submit" [disabled]="deviceForm.invalid">
           <mat-icon>add</mat-icon>
           Adicionar Dispositivo
         </button>
 
-        <button mat-stroked-button color="basic" type="button" (click)="onCancel()">
+        <button  *ngIf="modoEdicao" mat-flat-button color="primary" class="primary-btn"
+        type="submit" [disabled]="deviceForm.invalid">
+          <mat-icon>add</mat-icon>
+          Editar Dispositivo
+        </button>
+
+        <button disabled mat-stroked-button color="secondary" type="button"
+        *ngIf="modoEdicao" (click)="removerDispositivo()">
+          <mat-icon>delete</mat-icon>
+          Remover Dispositivo
+        </button>
+
+        <button mat-stroked-button color="basic" type="button" (click)="cancelar()">
           Cancelar
         </button>
       </div>

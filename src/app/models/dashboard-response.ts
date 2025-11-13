@@ -6,7 +6,6 @@ export interface DashboardResponse {
   online: number;
   offline: number;
   totalAlertas: number;
-  ativos: number;
   dispositivos: DispositivoDashboard[];
   alertas: AlertaDashboard[];
 }

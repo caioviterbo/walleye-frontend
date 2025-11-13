@@ -1,6 +1,6 @@
 // dispositivo-dashboard.model.ts
 export interface DispositivoDashboard {
-   id: string;
+  id: string;
   nome: string;
   localizacao: string;
   status: string;

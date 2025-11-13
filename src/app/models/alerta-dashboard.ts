@@ -6,5 +6,6 @@ export interface AlertaDashboard {
   mensagem: string;
   resolvido: boolean;
   data_deteccao: string;
-  idDispositivo?: DispositivoDashboard;
+  url_imagem: string;
+  dispositivo: DispositivoDashboard;
 }

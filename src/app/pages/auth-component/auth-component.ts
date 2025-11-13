@@ -9,7 +9,7 @@ import { Login } from '../../models/login';
 import { Registro } from '../../models/registro';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth-service';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 
@@ -37,7 +37,7 @@ export class AuthComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService,
-    private activeRouter: ActivatedRoute, private router: Router) {
+    private readonly activeRouter: ActivatedRoute, private readonly router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]]

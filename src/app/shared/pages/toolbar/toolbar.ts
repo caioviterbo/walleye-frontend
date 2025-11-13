@@ -44,5 +44,6 @@ export class Toolbar {
 
   logout() {
   localStorage.removeItem('token'); // remove token
+  this.router.navigate([''])
 }
 }
