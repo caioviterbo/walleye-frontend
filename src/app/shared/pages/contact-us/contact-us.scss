@@ -1,0 +1,32 @@
+.dialog-container {
+  width: 80%;
+  padding: 10px 0;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -10px;
+}
+
+.description {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.message-field {
+  margin-top: 15px;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #153b70 !important; /* azul escuro do seu layout */
+  color: white !important;
+}

@@ -7,12 +7,16 @@
     </div>
   </div>
   <div class="btn-container">
-    <button *ngIf="detectarLogin() && !detectarLoginEPagina()" (click)="irAdicionarDispositivo()" matButton="outlined">
+    <button *ngIf="detectarLogin() && !detectarLoginEPagina()" (click)="irAdicionarDispositivo()" matButton="filled">
       <mat-icon>login</mat-icon> Adicionar Dispositivo
     </button>
 
-    <button *ngIf="detectarLoginEPagina()" matButton="outlined" (click)="acessarDashboard()" routerLinkActive="active">
-      <mat-icon>login</mat-icon> Acessar dashboard
+    <button *ngIf="detectarLoginEPagina()" matButton="filled" (click)="acessarDashboard()" routerLinkActive="active">
+      <mat-icon>login</mat-icon> Acessar Dashboard
+    </button>
+
+    <button *ngIf="detectarLogin()" matButton="outlined" (click)="abrirModal()" routerLinkActive="active">
+      <mat-icon>chat</mat-icon> Fale Conosco
     </button>
 
     <button *ngIf="detectarLogin()" matButton="filled" (click)="logout()">
@@ -20,7 +24,7 @@
     </button>
 
     <button *ngIf="!detectarLogin()" matButton="filled" (click)="irLogar()" routerLinkActive="active">
-      <mat-icon>login</mat-icon> Acessar sistema
+      <mat-icon>login</mat-icon> Acessar Sistema
     </button>
 
   </div>

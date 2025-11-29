@@ -5,18 +5,29 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLinkActive } from "@angular/router";
 import { AuthService } from '../../../services/auth/auth-service';
 import { CommonModule } from '@angular/common';
+import { ContactUs } from '../contact-us/contact-us';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-toolbar',
   imports: [MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    CommonModule, RouterLinkActive],
+    CommonModule,
+    RouterLinkActive,
+    MatDialogModule],
   templateUrl: './toolbar.html',
   styleUrl: './toolbar.scss'
 })
 export class Toolbar {
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private dialog: MatDialog) {}
+
+  abrirModal(): void {
+    this.dialog.open(ContactUs, {
+      width: '500px',
+      maxWidth: '95vw',
+    });
+  }
 
   irRegistrar() {
     this.router.navigate(['/auth'], { queryParams: { tab: 'registro' } });

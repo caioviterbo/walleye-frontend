@@ -1,0 +1,32 @@
+<div class="dialog-container">
+  <div class="header">
+    <h2>Fale Conosco</h2>
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <p class="description">
+    Envie sua mensagem e entraremos em contato o mais breve possível.
+  </p>
+
+  <div class="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>E-mail</mat-label>
+      <input matInput placeholder="seu@email.com" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width message-field">
+      <mat-label>Mensagem</mat-label>
+      <textarea
+        matInput
+        rows="4"
+        placeholder="Digite sua mensagem..."
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <button mat-flat-button color="primary" class="submit-btn">
+    Enviar Mensagem
+  </button>
+</div>
